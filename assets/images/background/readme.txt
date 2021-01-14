@@ -1,0 +1,2 @@
+- Background design subtlepatterns (https://www.toptal.com/designers/subtlepatterns/)
+- Background Texturas (https://www.transparenttextures.com/)
