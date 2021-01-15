@@ -1,27 +1,27 @@
 class ClientModel {
-  final String image, title, description;
+  final String avatar, name, description;
   final int id;
 
   ClientModel({
     this.id,
-    this.image,
-    this.title,
+    this.avatar,
+    this.name,
     this.description,
   });
 
   factory ClientModel.fromJson(Map<String, dynamic> json) {
     return ClientModel(
       id: json["id"],
-      title: json["title"],
-      image: json["image"],
+      name: json["name"],
+      avatar: json["avatar"],
       description: json["description"],
     );
   }
 
   Map<String, dynamic> toJson() => {
         'id': this.id,
-        'image': this.image,
-        'title': this.title,
+        'avatar': this.avatar,
+        'name': this.name,
         'description': this.description,
       };
 }
@@ -29,45 +29,65 @@ class ClientModel {
 List<Map> clients = [
   {
     "id": 1,
-    "title": "Office Code",
-    "image": "assets/images/home/build.png",
+    "name": "Office Code",
+    "avatar": "assets/avatars/home/build.png",
   },
   {
     "id": 2,
-    "title": "Belt Bag",
-    "image": "assets/images/home/repair.png",
+    "name": "Belt Bag",
+    "avatar": "assets/avatars/home/repair.png",
   },
   {
-    "id": 2,
-    "title": "Belt Bag",
-    "image": "assets/images/home/maintenance.png",
+    "id": 3,
+    "name": "df Bag",
+    "avatar": "assets/avatars/home/maintenance.png",
   },
   {
-    "id": 2,
-    "title": "Belt Bag",
-    "image": "assets/images/home/build.png",
-  }
+    "id": 4,
+    "name": "ggg Bag",
+    "avatar": "assets/avatars/home/build.png",
+  },
+  {
+    "id": 5,
+    "name": "aaa Code",
+    "avatar": "assets/avatars/home/build.png",
+  },
+  {
+    "id": 6,
+    "name": "yuy Bag",
+    "avatar": "assets/avatars/home/repair.png",
+  },
+  {
+    "id": 7,
+    "name": "ddf Bag",
+    "avatar": "assets/avatars/home/maintenance.png",
+  },
+  {
+    "id": 8,
+    "name": "gggrr Bag",
+    "avatar": "assets/avatars/home/build.png",
+  },
 ];
 
 List<ClientModel> clientExample = [
   ClientModel(
     id: 1,
-    title: "Office Code",
-    image: "assets/images/home/build.png",
+    name: "Office Code",
+    avatar: "assets/avatars/home/build.png",
   ),
   ClientModel(
     id: 2,
-    title: "Belt Bag",
-    image: "assets/images/home/repair.png",
+    name: "Belt Bag",
+    avatar: "assets/avatars/home/repair.png",
   ),
   ClientModel(
     id: 2,
-    title: "Belt Bag",
-    image: "assets/images/home/maintenance.png",
+    name: "Belt Bag",
+    avatar: "assets/avatars/home/maintenance.png",
   ),
   ClientModel(
     id: 2,
-    title: "Belt Bag",
-    image: "assets/images/home/build.png",
+    name: "Belt Bag",
+    avatar: "assets/avatars/home/build.png",
   )
 ];

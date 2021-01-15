@@ -7,10 +7,10 @@ import './routes/index.dart';
 void main() {
   runApp(MultiProvider(
       providers: [
-        //ChangeNotifierProvider(create: (_) => ProviderClient()),
-        ChangeNotifierProvider.value(
+        ChangeNotifierProvider(create: (_) => ProviderClient()),
+        /*        ChangeNotifierProvider.value(
           value: ProviderClient(),
-        ),
+        ), */
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

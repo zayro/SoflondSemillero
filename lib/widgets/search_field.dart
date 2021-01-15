@@ -17,10 +17,7 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     final config = ConfigConstant(context);
-    final provider = ProviderClient();
-    var providers = Provider.of<ProviderClient>(context).getSearch;
-
-    //var provider = Provider.of<ProviderClient>(context);
+    final providers = Provider.of<ProviderClient>(context);
 
     return Container(
       width: config.mediaQueryData.size.width * 0.9,
@@ -34,7 +31,8 @@ class _SearchFieldState extends State<SearchField> {
             onChanged: (value) => {
               setState(() {}),
               print("SearchField ::" + value),
-              provider.search = value
+              providers.search = value
+              //context.read<ProviderClient>().search = value
             },
             decoration: InputDecoration(
                 //contentPadding: EdgeInsets.symmetric(vertical: 10),
@@ -43,8 +41,7 @@ class _SearchFieldState extends State<SearchField> {
                 enabledBorder: InputBorder.none,
                 hintText: "Search product",
                 prefixIcon: Icon(Icons.search)),
-          ),
-          Text(Provider.of<ProviderClient>(context).getSearch)
+          )
         ],
       ),
     );

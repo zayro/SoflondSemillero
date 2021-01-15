@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class ProviderClient with ChangeNotifier {
+class ProviderClient with ChangeNotifier, DiagnosticableTreeMixin {
   String _search =
       "Texto Inicial"; //Dentro de nuestro provider, creamos e inicializamos nuestra variable.
 
@@ -15,5 +15,12 @@ class ProviderClient with ChangeNotifier {
     print("ProviderClient: $newTexto");
     _search = newTexto; //actualizamos el valor
     notifyListeners(); //notificamos a los widgets que esten escuchando el stream.
+  }
+
+  /// Makes `Counter` readable inside the devtools by listing all of its properties
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('_search', search));
   }
 }
