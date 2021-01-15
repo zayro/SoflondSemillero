@@ -29,8 +29,10 @@ class _ClientPageState extends State<ClientPage> {
   num countDataSearch = 0;
   final GlobalKey _menuKey = new GlobalKey();
 
+  Future _future;
+
   dataClient() async {
-    var response = await http
+    _future = await http
         .getHttp('https://6001ffb108587400174db895.mockapi.io/api/v1/clientes');
   }
 
@@ -123,24 +125,40 @@ class _ClientPageState extends State<ClientPage> {
                 child: Text(providers.search),
               ),
               Expanded(
-                child: ListView.builder(
-                    itemCount: dataSearch.length ?? 0,
-                    itemBuilder: (BuildContext ctxt, int index) {
-                      //Map dataSearch = clients as Map;
-                      Map object = dataSearch[index] as Map;
-                      return Card(
-                          child: ListTile(
-                              title: Text("${index + 1} - ${object['name']} "),
-                              leading: Icon(Icons.supervised_user_circle_sharp),
-                              trailing: button(object['id']),
-                              //selected: true,
-                              onTap: () {
-                                // This is a hack because _PopupMenuButtonState is private.
-                                dynamic state = _menuKey.currentState;
-                                //state.showButtonMenu();
-                              }));
-                    }),
-              ),
+                  child: FutureBuilder(
+                      future: http.getHttp(
+                          'https://6001ffb108587400174db895.mockapi.io/api/v1/clientes'),
+                      builder: (context, AsyncSnapshot snap) {
+                        print("snap.data");
+                        print(snap.data);
+
+                        if (snap.hasData) {
+                          return ListView.builder(
+                              itemCount: snap.data.length ?? 0,
+                              itemBuilder: (BuildContext ctxt, int index) {
+                                //Map dataSearch = clients as Map;
+                                Map object = snap.data[index] as Map;
+
+                                return Card(
+                                    child: ListTile(
+                                        title: Text(
+                                            "${index + 1} - ${object['name']} "),
+                                        leading: Icon(
+                                            Icons.supervised_user_circle_sharp),
+                                        trailing: button(object['id']),
+                                        //selected: true,
+                                        onTap: () {
+                                          // This is a hack because _PopupMenuButtonState is private.
+                                          dynamic state = _menuKey.currentState;
+                                          //state.showButtonMenu();
+                                        }));
+                              });
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      })),
             ],
           ),
         ),
