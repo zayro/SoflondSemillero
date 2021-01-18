@@ -10,14 +10,39 @@ class SearchField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SearchFieldState createState() => _SearchFieldState();
+  SearchFieldState createState() => SearchFieldState();
 }
 
-class _SearchFieldState extends State<SearchField> {
+class SearchFieldState extends State<SearchField> {
+  TextEditingController controllerSearch = new TextEditingController();
+
+  _printLatestValue() {
+    print("Second text field: ${controllerSearch.text}");
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Start listening to changes.
+    // Comienza a escuchar los cambios
+    controllerSearch.addListener(" addListener $_printLatestValue");
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the
+    // widget tree.
+    controllerSearch.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final config = ConfigConstant(context);
-    final providers = Provider.of<ProviderClient>(context);
+    final providers = Provider.of<ProviderSearch>(context);
+
+    //controllerSearch.text = providers.search;
 
     return Container(
       width: config.mediaQueryData.size.width * 0.9,
@@ -27,7 +52,9 @@ class _SearchFieldState extends State<SearchField> {
       ),
       child: Column(
         children: [
-          TextField(
+          TextFormField(
+            //initialValue: providers.search,
+            controller: controllerSearch,
             onChanged: (value) => {
               setState(() {}),
               print("SearchField ::" + value),

@@ -1,4 +1,5 @@
 import 'package:app_flutter/service/http/index.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 //import 'package:provider/provider.dart';
@@ -16,30 +17,37 @@ class ClientPage extends StatefulWidget {
   const ClientPage({Key key}) : super(key: key);
 
   @override
-  _ClientPageState createState() => _ClientPageState();
+  ClientPageState createState() => ClientPageState();
 }
 
-class _ClientPageState extends State<ClientPage> {
+class ClientPageState extends State<ClientPage> {
   //var provider = Provider.of<ProviderClient>(context);
   //var json = jsonEncode(ClientModel().toJson());
 
   final http = Http();
 
-  String search = "";
+  String search, chipText = "";
+
+  List dataHttp = [];
   List dataSearch = [];
   num countDataSearch = 0;
   final GlobalKey _menuKey = new GlobalKey();
 
-  Future _future;
-
-  dataClient() async {
-    dataSearch = await http.getHttp('/clientes');
+  void dataClient() async {
+    dataSearch = await http.getHttpBasic('/clientes');
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    http.getHttpBasic('/clientes').then((value) => setState(() {
+          dataHttp = value;
+          dataSearch = value;
+          print("dataSearch");
+          print(dataSearch);
+        }));
   }
 
   @override
@@ -50,7 +58,7 @@ class _ClientPageState extends State<ClientPage> {
 
   @override
   Widget build(BuildContext context) {
-    final providers = Provider.of<ProviderClient>(context);
+    final providers = Provider.of<ProviderSearch>(context);
 
     final AlertDialog dialog = AlertDialog(
       title: Text('Title'),
@@ -157,15 +165,14 @@ class _ClientPageState extends State<ClientPage> {
           });
     }
 
-    //dataClient();
-
     if (providers.search.isNotEmpty) {
-      dataSearch = dataSearch
+      dataSearch = dataHttp
           .where((element) => (element["name"].contains(providers.search)))
           .toList();
       countDataSearch = dataSearch.length;
     } else {
       countDataSearch = 0;
+      dataSearch = [];
     }
 
     return Container(
@@ -180,7 +187,9 @@ class _ClientPageState extends State<ClientPage> {
             children: [
               Center(child: SearchField()),
               Center(
-                child: Text(providers.search),
+                child: Chip(
+                  label: Text(chipText),
+                ),
               ),
               Expanded(
                   child: ListView.builder(
@@ -199,7 +208,13 @@ class _ClientPageState extends State<ClientPage> {
                                 //selected: true,
                                 onTap: () {
                                   // This is a hack because _PopupMenuButtonState is private.
-                                  dynamic state = _menuKey.currentState;
+                                  //dynamic state = _menuKey.currentState;
+                                  print(object['name']);
+                                  setState(() {
+                                    providers.search = object['name'];
+                                    chipText = object['name'];
+                                  });
+
                                   //state.showButtonMenu();
                                 }));
                       })),

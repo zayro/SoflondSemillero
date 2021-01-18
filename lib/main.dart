@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'service/provider/client.dart';
 import 'service/provider/search.dart';
 import './routes/index.dart';
 
 void main() {
   runApp(MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => ProviderSearch()),
         ChangeNotifierProvider(create: (_) => ProviderClient()),
         /*        ChangeNotifierProvider.value(
           value: ProviderClient(),
