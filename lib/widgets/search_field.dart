@@ -26,7 +26,7 @@ class SearchFieldState extends State<SearchField> {
 
     // Start listening to changes.
     // Comienza a escuchar los cambios
-    controllerSearch.addListener(" addListener $_printLatestValue");
+    controllerSearch.addListener(_printLatestValue);
   }
 
   @override
