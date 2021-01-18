@@ -2,12 +2,16 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
 class Http {
+  String api = "https://6001ffb108587400174db895.mockapi.io/api/v1";
+
   Future getHttp(String url) async {
-    var response = await http.get(url);
+    print("getHttp");
+    var response = await http.get(this.api + url);
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
       //var data = jsonResponse['data'];
       //var dataCount = jsonResponse['count'];
+      //print(jsonResponse['data']);
 
       return jsonResponse['data'];
     } else {

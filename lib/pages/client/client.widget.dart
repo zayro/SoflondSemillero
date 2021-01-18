@@ -33,15 +33,13 @@ class _ClientPageState extends State<ClientPage> {
   Future _future;
 
   dataClient() async {
-    dataSearch = await http
-        .getHttp('https://6001ffb108587400174db895.mockapi.io/api/v1/clientes');
+    dataSearch = await http.getHttp('/clientes');
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    dataClient();
   }
 
   @override
@@ -90,8 +88,6 @@ class _ClientPageState extends State<ClientPage> {
         ),
       ],
     );
-
-    dataClient();
 
     PopupMenuButton button(id) {
       return PopupMenuButton(
@@ -161,6 +157,8 @@ class _ClientPageState extends State<ClientPage> {
           });
     }
 
+    //dataClient();
+
     if (providers.search.isNotEmpty) {
       dataSearch = dataSearch
           .where((element) => (element["name"].contains(providers.search)))
@@ -169,8 +167,6 @@ class _ClientPageState extends State<ClientPage> {
     } else {
       countDataSearch = 0;
     }
-
-//    final watch = context.watch<ClientController>();
 
     return Container(
       child: Scaffold(
@@ -186,21 +182,6 @@ class _ClientPageState extends State<ClientPage> {
               Center(
                 child: Text(providers.search),
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    /*               showDialog<void>(
-                        context: context,
-                        builder: (context) => ClientViewPage()); */
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) => ClientViewPage(),
-                        fullscreenDialog: true,
-                      ),
-                    );
-                  },
-                  child: Text('press')),
               Expanded(
                   child: ListView.builder(
                       itemCount: dataSearch.length ?? 0,

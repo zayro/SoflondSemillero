@@ -1,7 +1,9 @@
+import 'package:app_flutter/service/http/index.dart';
 import 'package:flutter/material.dart';
 
 class ClientViewPage extends StatefulWidget {
-  ClientViewPage({Key key}) : super(key: key);
+  final id;
+  ClientViewPage({Key key, this.id}) : super(key: key);
 
   @override
   _ClientViewPageState createState() => _ClientViewPageState();
@@ -9,6 +11,20 @@ class ClientViewPage extends StatefulWidget {
 
 class _ClientViewPageState extends State<ClientViewPage> {
   final _formKey = GlobalKey<FormState>();
+
+  List dataSearch = [];
+  final http = Http();
+
+  dataClient() async {
+    dataSearch = await http.getHttp(
+        'https://6001ffb108587400174db895.mockapi.io/api/v1/clientes/${widget.id}');
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
