@@ -1,34 +1,44 @@
 import 'package:app_flutter/service/http/index.dart';
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class ClientViewPage extends StatefulWidget {
   final id;
   ClientViewPage({Key key, this.id}) : super(key: key);
 
   @override
-  _ClientViewPageState createState() => _ClientViewPageState();
+  ClientViewPageState createState() => ClientViewPageState();
 }
 
-class _ClientViewPageState extends State<ClientViewPage> {
+class ClientViewPageState extends State<ClientViewPage> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController controllerID = new TextEditingController();
+  TextEditingController controllerName = new TextEditingController();
+  String avatar = '';
 
-  List dataSearch = [];
+  Map dataSearch = {};
   final http = Http();
-
-  dataClient() async {
-    dataSearch = await http.getHttp(
-        'https://6001ffb108587400174db895.mockapi.io/api/v1/clientes/${widget.id}');
-  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    http.getHttp('/clientes/${widget.id}').then((value) => setState(() {
+          setState(() {
+            dataSearch = value;
+            print(dataSearch);
+            controllerID.text = dataSearch['id'];
+            controllerName.text = dataSearch['name'];
+            avatar = dataSearch['image'];
+          });
+        }));
   }
 
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blue,
@@ -41,38 +51,35 @@ class _ClientViewPageState extends State<ClientViewPage> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Center(
+                      child: Container(
+                          width: 190.0,
+                          height: 190.0,
+                          decoration: new BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: new DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: NetworkImage(
+                                    avatar,
+                                  )))),
+                    ),
                     TextFormField(
+                      enabled: false,
+                      controller: controllerID,
+                      //initialValue: dataSearch['id'],
                       decoration: const InputDecoration(
-                        hintText: 'Enter your Name',
+                        labelText: 'ID',
+                        hintText: 'ID',
                       ),
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
                     ),
                     TextFormField(
-                      // The validator receives the text that the user has entered.
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Validate will return true if the form is valid, or false if
-                          // the form is invalid.
-                          if (_formKey.currentState.validate()) {
-                            // Process data.
-                          }
-                        },
-                        child: Text('Submit'),
+                      enabled: false,
+                      controller: controllerName,
+                      decoration: const InputDecoration(
+                        labelText: 'NAME',
+                        hintText: 'NAME',
                       ),
+                      //initialValue: dataSearch['name'],
                     ),
                   ])),
         ));

@@ -33,7 +33,9 @@ dependencies:
   carousel_pro: ^1.0.0
   carousel_slider: ^2.3.1
   responsive_grid: ^1.2.1+1
+  transparent_image: ^1.0.0
   steps: ^1.0.1
+  flutter_intro: ^1.0.0
   shared_preferences:
   path:
   http:

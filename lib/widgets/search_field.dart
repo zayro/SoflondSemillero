@@ -16,23 +16,31 @@ class SearchField extends StatefulWidget {
 class SearchFieldState extends State<SearchField> {
   TextEditingController controllerSearch = new TextEditingController();
 
-  _printLatestValue() {
-    print("Second text field: ${controllerSearch.text}");
-  }
-
   @override
   void initState() {
     super.initState();
 
     // Start listening to changes.
     // Comienza a escuchar los cambios
-    controllerSearch.addListener(_printLatestValue);
+    //controllerSearch.addListener(_printLatestValue);
+
+    controllerSearch.addListener(() {
+      ///final text = controllerSearch.text.toLowerCase();
+      final text = controllerSearch.text;
+      controllerSearch.value = controllerSearch.value.copyWith(
+        text: text,
+        selection:
+            TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
   }
 
   @override
   void dispose() {
     // Clean up the controller when the widget is removed from the
     // widget tree.
+    controllerSearch.clear();
     controllerSearch.dispose();
     super.dispose();
   }
@@ -42,7 +50,7 @@ class SearchFieldState extends State<SearchField> {
     final config = ConfigConstant(context);
     final providers = Provider.of<ProviderSearch>(context);
 
-    //controllerSearch.text = providers.search;
+    controllerSearch.text = providers.search;
 
     return Container(
       width: config.mediaQueryData.size.width * 0.9,
@@ -55,9 +63,10 @@ class SearchFieldState extends State<SearchField> {
           TextFormField(
             //initialValue: providers.search,
             controller: controllerSearch,
+
             onChanged: (value) => {
               setState(() {}),
-              print("SearchField ::" + value),
+              //print("SearchField ::" + value),
               providers.search = value
               //context.read<ProviderClient>().search = value
             },
@@ -66,7 +75,7 @@ class SearchFieldState extends State<SearchField> {
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 enabledBorder: InputBorder.none,
-                hintText: "Search product",
+                hintText: "Search Clients",
                 prefixIcon: Icon(Icons.search)),
           )
         ],

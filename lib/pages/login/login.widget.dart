@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   cursorColor: Theme.of(context).cursorColor,
                   initialValue: '',
-                  autofocus: false,
+                  //autofocus: false,
                   style: TextStyle(fontSize: 18.0, color: Colors.grey),
                   decoration: InputDecoration(
                     filled: true,
@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   cursorColor: Theme.of(context).cursorColor,
                   initialValue: '',
-                  autofocus: false,
+                  //autofocus: false,
                   obscureText: true,
                   decoration: InputDecoration(
                     filled: true,

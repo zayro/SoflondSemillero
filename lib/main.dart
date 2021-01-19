@@ -21,7 +21,7 @@ void main() {
           // This is the theme of your application.
           //
           brightness: Brightness.light,
-          primaryColor: Colors.brown,
+          primaryColor: Colors.indigo,
           accentColor: Colors.orange,
           buttonColor: Colors.deepOrange,
           // This makes the visual density adapt to the platform that you run
@@ -30,7 +30,7 @@ void main() {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         //home: MyHomePage(title: 'Flutter Demo Home Page'),
-        initialRoute: "/client",
+        initialRoute: "/login",
         routes: rootPath(),
       )));
 }

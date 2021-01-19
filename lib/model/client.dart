@@ -1,19 +1,15 @@
 class ClientModel {
-  final String avatar, name, description;
-  final int id;
+  final String id, avatar, name, description, image;
+  //final int id;
 
-  ClientModel({
-    this.id,
-    this.avatar,
-    this.name,
-    this.description,
-  });
+  ClientModel({this.id, this.avatar, this.name, this.description, this.image});
 
   factory ClientModel.fromJson(Map<String, dynamic> json) {
     return ClientModel(
       id: json["id"],
       name: json["name"],
       avatar: json["avatar"],
+      image: json["image"],
       description: json["description"],
     );
   }
@@ -21,6 +17,7 @@ class ClientModel {
   Map<String, dynamic> toJson() => {
         'id': this.id,
         'avatar': this.avatar,
+        'image': this.image,
         'name': this.name,
         'description': this.description,
       };
@@ -71,22 +68,22 @@ List<Map> clients = [
 
 List<ClientModel> clientExample = [
   ClientModel(
-    id: 1,
+    id: "1",
     name: "Office Code",
     avatar: "assets/avatars/home/build.png",
   ),
   ClientModel(
-    id: 2,
+    id: "2",
     name: "Belt Bag",
     avatar: "assets/avatars/home/repair.png",
   ),
   ClientModel(
-    id: 2,
+    id: "3",
     name: "Belt Bag",
     avatar: "assets/avatars/home/maintenance.png",
   ),
   ClientModel(
-    id: 2,
+    id: "4",
     name: "Belt Bag",
     avatar: "assets/avatars/home/build.png",
   )
