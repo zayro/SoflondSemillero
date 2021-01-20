@@ -90,9 +90,16 @@ class ClientPageState extends State<ClientPage> {
     print("dispose");
   }
 
+  // Colors that we use in our app
+  var kPrimaryColor = Color(0xFF0C9869);
+  var kTextColor = Color(0xFF3C4046);
+  var kBackgroundColor = Color(0xFFF9F8FD);
+  double kDefaultPadding = 20.0;
   @override
   Widget build(BuildContext context) {
     final providers = Provider.of<ProviderSearch>(context);
+
+    Size size = MediaQuery.of(context).size;
 
     // set up the AlertDialog
     AlertDialog alert(id) {
@@ -216,7 +223,7 @@ class ClientPageState extends State<ClientPage> {
         child: Scaffold(
           key: _scaffoldKey,
           appBar: AppBar(
-            title: Text("List of Clients"),
+            //title: Text("List of Clients"),
             //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             toolbarOpacity: 0.9,
             elevation: 0.1,
@@ -235,12 +242,68 @@ class ClientPageState extends State<ClientPage> {
             ],
           ),
           body: Container(
-            margin: EdgeInsets.all(20),
+            //margin: EdgeInsets.all(20),
             child: Column(
               children: [
-                (dataHttp.isNotEmpty)
-                    ? Center(key: intro.keys[1], child: SearchField())
-                    : CircularProgressIndicator(),
+                Container(
+                  height: size.height * 0.2,
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                        height: size.height,
+                        padding: EdgeInsets.only(
+                          left: kDefaultPadding,
+                          right: kDefaultPadding,
+                          bottom: kDefaultPadding,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(40),
+                            bottomRight: Radius.circular(40),
+                          ),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'List of Clients',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5
+                                  .copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                            ),
+                            //Spacer(),
+                            //Image.asset("assets/images/logo.png")
+                          ],
+                        ),
+                      ),
+                      Container(
+                        child: Positioned(
+                          bottom: 15,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.symmetric(
+                                horizontal: kDefaultPadding),
+                            //padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: (dataHttp.isNotEmpty)
+                                ? Center(
+                                    key: intro.keys[1], child: SearchField())
+                                : CircularProgressIndicator(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 if (providers.search.isNotEmpty)
                   Center(
                     child: InputChip(

@@ -63,18 +63,19 @@ class ClientEditPageState extends State<ClientEditPage> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Center(
-                      child: Container(
-                          width: 190.0,
-                          height: 190.0,
-                          decoration: new BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: new DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(
-                                    avatar,
-                                  )))),
-                    ),
+                    if (avatar.isNotEmpty)
+                      Center(
+                        child: Container(
+                            width: 190.0,
+                            height: 190.0,
+                            decoration: new BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: new DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: NetworkImage(
+                                      avatar,
+                                    )))),
+                      ),
                     TextFormField(
                       enabled: false,
                       controller: controllerID,

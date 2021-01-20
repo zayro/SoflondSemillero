@@ -53,7 +53,7 @@ class SearchFieldState extends State<SearchField> {
     controllerSearch.text = providers.search;
 
     return Container(
-      width: config.mediaQueryData.size.width * 0.9,
+      //width: config.mediaQueryData.size.width * 0.9,
       decoration: BoxDecoration(
         color: Color(0xFF979797).withOpacity(0.1),
         borderRadius: BorderRadius.circular(15),
