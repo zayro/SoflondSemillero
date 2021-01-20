@@ -12,7 +12,7 @@ class Alert extends StatelessWidget {
       case 'success':
         icono = Icon(Icons.check, size: 50, color: Colors.green);
         break;
-      case 'warninig':
+      case 'warning':
         icono = Icon(Icons.warning, size: 50, color: Colors.orange);
         break;
       case 'error':

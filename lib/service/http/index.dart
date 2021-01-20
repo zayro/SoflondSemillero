@@ -94,4 +94,33 @@ class Http {
       //throw ("Error getHttp ${response.statusCode}");
     }
   }
+
+  Future login(String user, String pass) async {
+    List countResult = [];
+    var response = await http.get(this.api + '/usuarios?email=$user');
+    if (response.statusCode == 200) {
+      var jsonResponse = convert.jsonDecode(response.body);
+
+      print(jsonResponse);
+
+      //countResult = jsonResponse;
+
+      countResult = jsonResponse
+          .where((element) =>
+              (element['email'] == (user) && element['password'] == (pass)))
+          .toList();
+
+      print("countResult");
+      print(countResult);
+
+      if (countResult.length >= 1) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      print('Request failed with status: ${response.statusCode}.');
+      throw ("Error getHttp ${response.statusCode}");
+    }
+  }
 }
