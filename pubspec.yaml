@@ -39,7 +39,11 @@ dependencies:
   shared_preferences:
   path:
   http:
-  provider:      
+  provider:     
+
+  flutter_driver: 
+    sdk: flutter 
+  test: ^1.14.4 
 
 
   # The following adds the Cupertino Icons font to your application.

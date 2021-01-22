@@ -134,8 +134,10 @@ class ClientPageState extends State<ClientPage> {
     PopupMenuButton button(id) {
       return PopupMenuButton(
           //key: UniqueKey(),
+          key: Key("$id"),
           itemBuilder: (_) => <PopupMenuItem<String>>[
                 PopupMenuItem<String>(
+                    key: Key('ver'),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -316,6 +318,7 @@ class ClientPageState extends State<ClientPage> {
                   ),
                 Expanded(
                     child: ListView.builder(
+                        key: Key("Listado"),
                         itemCount: dataSearch.length ?? 0,
                         itemBuilder: (BuildContext ctxt, int index) {
                           //Map dataSearch = clients as Map;
@@ -324,6 +327,7 @@ class ClientPageState extends State<ClientPage> {
 
                           return Card(
                               child: ListTile(
+                                  key: Key("list-${object['id']}"),
                                   title: Text(
                                       "${object['id']} - ${object['name']} "),
                                   leading:

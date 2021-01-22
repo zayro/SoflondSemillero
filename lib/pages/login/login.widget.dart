@@ -65,6 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                     //initialValue: '',
                     controller: controllerUser,
                     //autofocus: false,
+                    key: Key('controllerUser'),
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -110,6 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                     //autofocus: false,
                     obscureText: true,
                     controller: controllerPassword,
+                    key: Key('controllerPassword'),
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please enter some text';
@@ -148,6 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 60,
                     width: double.infinity,
                     child: RaisedButton(
+                      key: Key('boton_enviar'),
                       onPressed: () async {
                         // Respond to button press
                         if (_formKey.currentState.validate()) {

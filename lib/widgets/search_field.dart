@@ -63,7 +63,7 @@ class SearchFieldState extends State<SearchField> {
           TextFormField(
             //initialValue: providers.search,
             controller: controllerSearch,
-
+            key: Key("buscador"),
             onChanged: (value) => {
               setState(() {}),
               //print("SearchField ::" + value),
